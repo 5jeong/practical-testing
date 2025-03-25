@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import sample.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import sample.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import sample.cafekiosk.spring.api.service.product.response.ProductResponse;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductRepository;
@@ -33,7 +33,6 @@ class ProductServiceTest {
     @AfterEach
     void tearDown() {
         productRepository.deleteAllInBatch();
-        ;
     }
 
     @DisplayName("신규 상품을 등록한다. 상품번호는 가장 최근 상품의 상품번호에서 1증가한 것이다.")
@@ -42,8 +41,7 @@ class ProductServiceTest {
         //given
         Product product = createProduct("001", HANDMADE, SELLING, "아메리카노", 4000);
         productRepository.save(product);
-
-        ProductCreateRequest request = ProductCreateRequest.builder()
+        ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .type((HANDMADE))
                 .sellingStatus((SELLING))
                 .name("카푸치노")
@@ -72,7 +70,7 @@ class ProductServiceTest {
     @Test
     void createProduct2() {
         //given
-        ProductCreateRequest request = ProductCreateRequest.builder()
+        ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .type((HANDMADE))
                 .sellingStatus((SELLING))
                 .name("카푸치노")
