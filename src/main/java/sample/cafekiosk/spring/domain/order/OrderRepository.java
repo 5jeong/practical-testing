@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("select o from Order  o "
             + "where o.registeredDateTime >= :startDateTime "
-            + "and o.registeredDateTime <= :endDateTime "
+            + "and o.registeredDateTime < :endDateTime "
             + "and o.orderStatus<=:orderStatus")
     List<Order> findOrderBy(LocalDateTime startDateTime, LocalDateTime endDateTime, OrderStatus orderStatus);
 
